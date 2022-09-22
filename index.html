@@ -13,28 +13,31 @@
         <h1>Weather App!</h1>
     </header>
     <main>
-        <section id="weather">
-            <h2>Weather</h2>
-            <article id="current-weather">
-                <h3>Current Weather</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga culpa aperiam perferendis dolor tempora provident iusto facere, veniam quis consectetur aliquid debitis fugit repudiandae aliquam accusamus ratione illo unde recusandae?
-            </article>
-            
-            <article id="five-day-forecast">
-                <h3>5-day Forecast</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic animi amet quia quos! Nostrum, rem nemo tempora animi atque cumque ipsum perspiciatis? Quibusdam adipisci non accusamus ut laboriosam harum placeat!
-            </article>
-        </section>
-
         <section id="search">
             <h2>Search</h2>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum sed ullam quisquam minima amet velit harum dolor labore odio rem esse, assumenda pariatur, necessitatibus qui praesentium sint soluta eligendi debitis.
+        </section>
+
+        <section id="weather">
+            <h3><span id="location"></span> <span id="todays-date"></span></h3>
+            <article id="current-weather">
+                <div><label>Temp:</label><span id="todays-temp"></span></div>
+                <div><label>Wind:</label><span id="todays-wind"></span></div>
+                <div><label>Humidity:</label><span id="todays-humidity"></span></div>
+            </article>
+            
+            <h3>5-day Forecast</h3>
+            <article id="five-day-forecast">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic animi amet quia quos! Nostrum, rem nemo tempora animi atque cumque ipsum perspiciatis? Quibusdam adipisci non accusamus ut laboriosam harum placeat!
+            </article>
         </section>
     </main>
     <footer>
         Made by Joe Shoulak
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/scripts/main.js"></script>
 </body>
 </html>

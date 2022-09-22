@@ -1,9 +1,11 @@
+/* == Global == */
 * {
     outline: solid red 1px;
     font-family: sans-serif;
     margin: 0;
 }
 
+/* == Elements == */
 header, footer {
     background-color: skyblue;
     padding: 15px;
