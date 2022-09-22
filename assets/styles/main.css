@@ -1,3 +1,29 @@
 * {
     outline: solid red 1px;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+header, footer {
+    background-color: skyblue;
+    padding: 15px;
+}
+
+header h1 {
+    color: white;
+    font-size: 2em;
+    text-align: center;
+}
+
+main {
+    display: flex;
+}
+
+footer {
+    color: white;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
 }
