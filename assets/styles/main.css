@@ -1,4 +1,4 @@
-/* == Global == */
+== Global ==
 * {
     /* outline: solid red 1px; */
     font-family: sans-serif;
@@ -17,10 +17,6 @@ header h1 {
     text-align: center;
 }
 
-main {
-    display: flex;
-}
-
 footer {
     color: white;
     text-align: center;
@@ -28,18 +24,4 @@ footer {
     width: 100%;
     bottom: 0;
     left: 0;
-}
-
-.card {
-    margin: 5px;
-    padding: 5px;
-    outline: black solid 1px;
-}
-
-.card span {
-    display: block;
-}
-
-#five-day-forecast {
-    display: flex;
 }
