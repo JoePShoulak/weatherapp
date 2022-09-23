@@ -32,7 +32,7 @@ function renderForecastedWeather(data) {
     // For every day of forecasted data
     forecast.forEach(weatherDay => {
         // Make a holder card
-        var card = $('<div>').addClass('card column col-lg-2 col-sm-12');
+        var card = $('<div>').addClass('card column col-2');
 
         // Make a title of the date
         var title = $('<h5>').text(weatherDay.dt_txt.split(" ")[0]);
