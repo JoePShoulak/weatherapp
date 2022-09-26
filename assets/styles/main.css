@@ -25,3 +25,9 @@ footer {
     bottom: 0;
     left: 0;
 }
+
+/* == Classes == */
+
+.icon {
+    width: 30px;
+}
