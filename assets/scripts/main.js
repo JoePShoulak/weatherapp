@@ -1,11 +1,10 @@
+// Constants
 var testCity = "Minneapolis";
 var endpoint = "https://api.openweathermap.org/data/2.5/";
 var apiKey = "fe78b54641e53796124286d599942e78";
 
-// Because the API returns in Kelvin because...... I don't know
-function kelvinTofahrenheit(temp) {
-    return Math.round(((temp - 273.15) * 9/5 + 32)*100)/100;
-}
+// DOM Elements
+var article = $('#five-day-forecast');
 
 // Update the page HTML to show the current weather
 function renderCurrentWeather(data) {
@@ -17,76 +16,70 @@ function renderCurrentWeather(data) {
     $("#todays-humidity").text(`${data.main.humidity}%`);
 }
 
+// Render one of the weather card to be displayed in Forecast
+function renderWeatherCard(weatherData) {
+    return $('<div>').addClass('card column col-2')
+      .append($('<h5>').text(weatherData.dt_txt.split(" ")[0]))  // Title / Date
+      .append($('<span>').text(`${weatherData.main.temp}°F`))    // Temp
+      .append($('<span>').text(`${weatherData.wind.speed}mph`))  // Wind
+      .append($('<span>').text(`${weatherData.main.humidity}%`)) // Humidity
+}
+
 // Update the page HTML to show the forecasted weather
 function renderForecastedWeather(data) {
     var forecast = [];
 
     // Grab every 8th time slot
-    // THIS IS A LIE
-    for (i = 0; i < 40; i+=8) { forecast.push(data.list[i]); }
+    for (i = 0; i < 40; i+=8) { forecast.push(data.list[i]); } // THIS IS A LIE
+  
+    article.empty(); // Delete all forecast data
 
-    // Delete all forecast data
-    var article = $('#five-day-forecast') 
-    article.empty();
-
-    // For every day of forecasted data
-    forecast.forEach(weatherDay => {
-        // Make a holder card
-        var card = $('<div>').addClass('card column col-2');
-
-        // Make a title of the date
-        var title = $('<h5>').text(weatherDay.dt_txt.split(" ")[0]);
-
-        // Make our spans with data
-        var temp = $('<span>').text(`${weatherDay.main.temp}°F`);
-        var wind = $('<span>').text(`${weatherDay.wind.speed}mph`);
-        var humidity = $('<span>').text(`${weatherDay.main.humidity}%`);
-
-        // Put everything into the holder card
-        card.append(title);
-        card.append(temp);
-        card.append(wind);
-        card.append(humidity);
-        
-        // Put the card into the DOM
-        article.append(card);
-    });
+    // For every day of forecasted data, append a new forecast card
+    forecast.forEach(weatherData => { article.append(renderWeatherCard(weatherData)); });
 }
 
 // Get the current weather given a city
 function fetchCurrentWeather(city) {
     fetch(endpoint + "weather?q=" + city + "&units=imperial&appid=" + apiKey)
-    .then(response => {
-        return response.json();
-    })
-    .then(data => {
-        renderCurrentWeather(data);
-    });
+      .then(response => { return response.json(); })
+      .then(data => { renderCurrentWeather(data); });
 }
 
 // Get the current weather given a city
-/* This is currently the wrong query, this returns the future weather in 3-hour
-   chunks for the next 5 days (40 elements in total). We're trying to return daily
-   forecasts, which could technically be partially aggregated from this data,
-   but that is not what the assignment is going for */
 function fetchForecastWeather(city) {
-    // https://api.openweathermap.org/data/2.5/onecall?lat=38.7267&lon=-9.1403&exclude=current,hourly,minutely,alerts&units=metric&appid=fe78b54641e53796124286d599942e78
     fetch(endpoint + "forecast?q=" + city + "&units=imperial&appid=" + apiKey)
-    .then(response => {
-        return response.json();
-    })
-    .then(data => {
-        renderForecastedWeather(data);
-    });
+      .then(response => { return response.json(); })
+      .then(data => { renderForecastedWeather(data); });
+}
+
+// We never update one but not the other, so let's tie these together
+function fetchAllData(city) {
+    fetchCurrentWeather(city);
+    fetchForecastWeather(city);
+}
+
+// Handle the searching for a new city
+function citySearch() {
+    var city = $("#city-search").val(); // Grab our city
+
+    fetchAllData(city); // Fetch and render all the data
+
+    $('#history').append($("<li>").text(city)) // Add it to our list of searches
+}
+
+// Handle clicks on recently searched cities
+function historyClick(event) {
+    fetchAllData($(event.target).text());
 }
 
 // On page first load
 function init() {
-    fetchCurrentWeather(testCity);
-    fetchForecastWeather(testCity);
+    fetchAllData(testCity);
 }
+
+// Event Listeners
+$("#city-search-button").on("click", citySearch);
+$("#history").on("click", historyClick);
 
 // Begin the page
 init();
-
-
