@@ -1,8 +1,8 @@
 // Constants
-var testCity = "Minneapolis";
-var iconURL = "http://openweathermap.org/img/wn/";
-var base = "https://api.openweathermap.org/data/2.5/";
-var apiKey = "fe78b54641e53796124286d599942e78";
+const testCity = "Minneapolis";
+const iconURL = "http://openweathermap.org/img/wn/";
+const base = "https://api.openweathermap.org/data/2.5/";
+const apiKey = "fe78b54641e53796124286d599942e78";
 
 // DOM Elements
 var article = $('#five-day-forecast');
